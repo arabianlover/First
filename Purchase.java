@@ -1,5 +1,7 @@
 package com.financeCalculator;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,23 +10,22 @@ public class Purchase {
     //Этот класс содержит поля: название, цена покупки, сумма цен. Список всех имен покупок
 
 
+    private LocalDate date;
     private String name;
     private double price;
+    private String type;
 
     private static double sumOfPrices;
 
     private static ArrayList<String> listOfNames = new ArrayList<>();
 
-    public Purchase(String name, double price){
+    public Purchase(short day, short month, short year, String name, double price, String type){
+        this.date = LocalDate.of(year, month, day);
         this.name = name;
         this.price = price < 0 ? 0 : price;
         listOfNames.add(name);
     }
-    public Purchase(double price, String name){
-        this.price = price < 0 ? 0 : price;
-        this.name = name;
-        listOfNames.add(name);
-    }
+
 
     public String toString(){
         return name;
@@ -46,7 +47,24 @@ public class Purchase {
         this.price = price < 0 ? 0 : price;
     }
 
-    public static ArrayList<Purchase> autoCreateArrayListOfPurchases(){
+    public Short getDay(){
+        return (short) date.getDayOfMonth();
+    }
+    public Short getMonth(){
+        return (short) date.getMonthValue();
+    }
+    public Short getYear(){
+        return (short) date.getYear();
+    }
+    public LocalDate getDate(){
+        return date;
+    }
+    public String getType(){
+        return type;
+    }
+
+
+    /*public static ArrayList<Purchase> autoCreateArrayListOfPurchases(){
         ArrayList<Purchase> listOfPurchases = new ArrayList<>();
         Purchase purchase = new Purchase("water", 300);
         Purchase purchase1 = new Purchase("bread", 100);
@@ -60,9 +78,9 @@ public class Purchase {
         listOfPurchases.add(purchase4);
 
         return listOfPurchases;
-    }
+    }*/
 
-    public static ArrayList<Purchase> createArrayListOfPurchases(){
+    /*public static ArrayList<Purchase> createArrayListOfPurchases(){
 
         //Этот метод создает список объектов Purchase
         Scanner scanner = new Scanner(System.in);
@@ -81,7 +99,7 @@ public class Purchase {
         }
 
         return listOfPurchases;
-    }
+    }*/
 
     public static void printListOfPurchases(ArrayList<Purchase> listOfPurchases){
 
